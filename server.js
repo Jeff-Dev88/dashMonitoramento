@@ -4,6 +4,7 @@ const next = require('next');
 const { WebSocketServer } = require('ws');
 const { getSystemData } = require('./src/lib/systemMonitor');
 const { startFPSMonitor, getCurrentFPS } = require('./src/lib/fpsMonitor');
+const { startHardwareMonitor, getTemperatures } = require('./src/lib/hardwareMonitor');
 
 const dev = process.env.NODE_ENV !== 'production';
 const hostname = '0.0.0.0'; // Aceita conexões de qualquer IP
@@ -66,8 +67,9 @@ app.prepare().then(() => {
     console.error('WebSocket Server error:', error.message);
   });
 
-  // Iniciar monitor de FPS
+  // Iniciar monitores
   startFPSMonitor();
+  startHardwareMonitor();
 
   server.listen(port, hostname, () => {
     console.log(`

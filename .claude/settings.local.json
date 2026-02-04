@@ -8,7 +8,10 @@
       "Bash(findstr:*)",
       "Bash(netstat:*)",
       "Bash(taskkill:*)",
-      "Bash(cmd //c \"taskkill /PID 17924 /F\")"
+      "Bash(cmd //c \"taskkill /PID 17924 /F\")",
+      "Bash(node -e:*)",
+      "Bash(powershell -Command:*)",
+      "Bash(cmd /c \"powershell -NoProfile -Command \"\"Get-WmiObject MSAcpi_ThermalZoneTemperature -Namespace root/wmi -ErrorAction SilentlyContinue | Select-Object -ExpandProperty CurrentTemperature\"\"\")"
     ]
   }
 }

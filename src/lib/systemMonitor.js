@@ -30,8 +30,9 @@ function getCpuTempWindows() {
 
   try {
     // Método 2: Tentar via Open Hardware Monitor WMI (se instalado)
+    // Busca por sensores CPU (Intel: Package/Core, AMD: Tdie/Tctl/CCD)
     const result = execSync(
-      'powershell -Command "Get-WmiObject -Namespace root/OpenHardwareMonitor -Class Sensor 2>$null | Where-Object { $_.SensorType -eq \'Temperature\' -and $_.Name -like \'*CPU*\' } | Select-Object -ExpandProperty Value -First 1"',
+      'powershell -Command "Get-WmiObject -Namespace root/OpenHardwareMonitor -Class Sensor 2>$null | Where-Object { $_.SensorType -eq \'Temperature\' -and ($_.Name -like \'*CPU*\' -or $_.Name -like \'*Package*\' -or $_.Name -like \'*Core*\' -or $_.Name -like \'*Tdie*\' -or $_.Name -like \'*Tctl*\') } | Select-Object -ExpandProperty Value -First 1"',
       { encoding: 'utf8', timeout: 2000, windowsHide: true }
     ).trim();
 
@@ -46,9 +47,10 @@ function getCpuTempWindows() {
   }
 
   try {
-    // Método 3: LibreHardwareMonitor WMI (se instalado)
+    // Método 3: LibreHardwareMonitor WMI (se instalado e rodando)
+    // Busca por sensores CPU (Intel: Package/Core, AMD: Tdie/Tctl/CCD)
     const result = execSync(
-      'powershell -Command "Get-WmiObject -Namespace root/LibreHardwareMonitor -Class Sensor 2>$null | Where-Object { $_.SensorType -eq \'Temperature\' -and $_.Name -like \'*CPU*\' } | Select-Object -ExpandProperty Value -First 1"',
+      'powershell -Command "Get-WmiObject -Namespace root/LibreHardwareMonitor -Class Sensor 2>$null | Where-Object { $_.SensorType -eq \'Temperature\' -and ($_.Name -like \'*CPU*\' -or $_.Name -like \'*Package*\' -or $_.Name -like \'*Core*\' -or $_.Name -like \'*Tdie*\' -or $_.Name -like \'*Tctl*\') } | Select-Object -ExpandProperty Value -First 1"',
       { encoding: 'utf8', timeout: 2000, windowsHide: true }
     ).trim();
 

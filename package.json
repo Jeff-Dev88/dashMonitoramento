@@ -1,0 +1,17 @@
+{
+  "name": "dash-monitoramento",
+  "version": "1.0.0",
+  "description": "Dashboard de monitoramento de hardware em tempo real",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "dependencies": {
+    "next": "^14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "systeminformation": "^5.21.0",
+    "ws": "^8.14.0"
+  }
+}
